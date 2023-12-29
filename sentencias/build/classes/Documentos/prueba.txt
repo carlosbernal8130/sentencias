@@ -1,0 +1,1 @@
+select cab_num_planilla, cab_estado, cab_per_salud_ano, cab_per_salud_mes, cab_fecha_pago, cab_entidad_recaudo from cabeza_planilla where cab_fecha_pago = current_date and cab_tipo_planilla = 'J' and cab_per_salud_ano = '2023' and cab_per_salud_mes >= '09' and cab_estado in ('2','3') and cab_entidad_recaudo='DAVIVI';
