@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="sentencias/src"/>
+	<classpathentry kind="lib" path="sentencias/dist/lib/jakarta.jakartaee-api-8.0.0.jar"/>
+	<classpathentry kind="lib" path="sentencias/dist/lib/jcalendar-1.4.jar"/>
+	<classpathentry kind="lib" path="sentencias/dist/sentencias_lib/jcalendar-1.4.jar"/>
+	<classpathentry kind="lib" path="sentencias/dist/sentencias_lib/jgoodies-forms-1.8.0.jar"/>
+	<classpathentry kind="lib" path="sentencias/dist/sentencias.jar"/>
+	<classpathentry kind="lib" path="sentencias/jcalendar-1.4.jar"/>
+	<classpathentry kind="lib" path="sentencias/jgoodies-forms-1.8.0.jar"/>
+	<classpathentry kind="lib" path="sentencias/jgoodies-forms-1.8.0-sources.jar"/>
+	<classpathentry kind="output" path="sentencias/build/classes"/>
+</classpath>
