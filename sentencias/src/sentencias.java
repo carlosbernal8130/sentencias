@@ -5,6 +5,7 @@ import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
 import java.io.*;
+import java.time.Year;
 import java.util.function.Function;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,7 +27,16 @@ import java.awt.SystemColor;
 public class sentencias extends javax.swing.JFrame {
 
     private static final long serialVersionUID = 1L;
-
+    
+    Year anioActual = Year.now();
+    String anioActualStr = anioActual.toString();
+    
+    Year anioAnterior = anioActual.minusYears(1);
+    String anioAnteriorStr = anioAnterior.toString();
+    
+    Year anioProximo = anioActual.plusYears(1);
+    String anioProximoStr = anioProximo.toString();
+    
 	/**
      * Creates new form sentencias
      */
@@ -103,7 +113,7 @@ public class sentencias extends javax.swing.JFrame {
 
         jlPeriodo.setModel(new AbstractListModel() {
         	private static final long serialVersionUID = 1L;
-			String[] values = new String[] {"2024", "2025", "2024 y 2025"};
+			String[] values = new String[] {anioAnteriorStr, anioActualStr, anioAnteriorStr + " y " + anioActualStr};
         	public int getSize() {
         		return values.length;
         	}
@@ -215,14 +225,14 @@ public class sentencias extends javax.swing.JFrame {
         switch (cbSentencias.getSelectedIndex()){
             case 0:
                 if (txtAportante.getText().length()>0 && jlPeriodo.isSelectedIndex(0)) {
-                    consulta = "select cab_fecha_trab, cab_fecha_vencimiento, cab_usuario, cab_num_planilla as planilla, cab_pin as pin, cab_tipo_planilla as tipo, cab_tipo_ide as tip, cab_num_ide as num, cab_sucursal as suc, cab_estado as estado, cab_indpago as ind, cab_per_pension_ano as ano, cab_per_pension_mes as mes, t11_total_salud as salud, t11_total_pension as pension, t11_total_arp as arp, t11_total_ccf as ccf, t11_gran_total as total_pago, cab_fecha_pago as fecha_pago, cab_hora_trab_pago as hora_pago, cab_entidad_recaudo entidad_recaudo, cab_clase_entidad as clase_entidad from cabeza_planilla,registro_tipo_11 where cab_num_planilla=t11_num_planilla and cab_per_pension_mes=t11_mes_pension and cab_per_pension_ano=t11_ano_pension and cab_num_ide=t11_num_ide_aport and cab_tipo_planilla=t11_tipo_planilla and cab_sucursal=t11_sucursal and cab_per_pension_ano in ('2024') and cab_tipo_ide in ('CC','NI','CE','CD','TI','PE','PA') and cab_num_ide='" + txtAportante.getText() + "' order by cab_per_pension_ano,cab_per_pension_mes;";
+                    consulta = "select cab_fecha_trab, cab_fecha_vencimiento, cab_usuario, cab_num_planilla as planilla, cab_pin as pin, cab_tipo_planilla as tipo, cab_tipo_ide as tip, cab_num_ide as num, cab_sucursal as suc, cab_estado as estado, cab_indpago as ind, cab_per_pension_ano as ano, cab_per_pension_mes as mes, t11_total_salud as salud, t11_total_pension as pension, t11_total_arp as arp, t11_total_ccf as ccf, t11_gran_total as total_pago, cab_fecha_pago as fecha_pago, cab_hora_trab_pago as hora_pago, cab_entidad_recaudo entidad_recaudo, cab_clase_entidad as clase_entidad from cabeza_planilla,registro_tipo_11 where cab_num_planilla=t11_num_planilla and cab_per_pension_mes=t11_mes_pension and cab_per_pension_ano=t11_ano_pension and cab_num_ide=t11_num_ide_aport and cab_tipo_planilla=t11_tipo_planilla and cab_sucursal=t11_sucursal and cab_per_pension_ano in ('" + anioAnteriorStr + "') and cab_tipo_ide in ('CC','NI','CE','CD','TI','PE','PA') and cab_num_ide='" + txtAportante.getText() + "' order by cab_per_pension_ano,cab_per_pension_mes;";
                     txtVisualizar.setText(consulta);
                 } else if (txtAportante.getText().length()>0 && jlPeriodo.isSelectedIndex(1)){
-                    consulta = "select cab_fecha_trab, cab_fecha_vencimiento, cab_usuario, cab_num_planilla as planilla, cab_pin as pin, cab_tipo_planilla as tipo, cab_tipo_ide as tip, cab_num_ide as num, cab_sucursal as suc, cab_estado as estado, cab_indpago as ind, cab_per_pension_ano as ano, cab_per_pension_mes as mes, t11_total_salud as salud, t11_total_pension as pension, t11_total_arp as arp, t11_total_ccf as ccf, t11_gran_total as total_pago, cab_fecha_pago as fecha_pago, cab_hora_trab_pago as hora_pago, cab_entidad_recaudo entidad_recaudo, cab_clase_entidad as clase_entidad from cabeza_planilla,registro_tipo_11 where cab_num_planilla=t11_num_planilla and cab_per_pension_mes=t11_mes_pension and cab_per_pension_ano=t11_ano_pension and cab_num_ide=t11_num_ide_aport and cab_tipo_planilla=t11_tipo_planilla and cab_sucursal=t11_sucursal and cab_per_pension_ano in ('2025') and cab_tipo_ide in ('CC','NI','CE','CD','TI','PE','PA') and cab_num_ide='" + txtAportante.getText() + "' order by cab_per_pension_ano,cab_per_pension_mes;";
+                    consulta = "select cab_fecha_trab, cab_fecha_vencimiento, cab_usuario, cab_num_planilla as planilla, cab_pin as pin, cab_tipo_planilla as tipo, cab_tipo_ide as tip, cab_num_ide as num, cab_sucursal as suc, cab_estado as estado, cab_indpago as ind, cab_per_pension_ano as ano, cab_per_pension_mes as mes, t11_total_salud as salud, t11_total_pension as pension, t11_total_arp as arp, t11_total_ccf as ccf, t11_gran_total as total_pago, cab_fecha_pago as fecha_pago, cab_hora_trab_pago as hora_pago, cab_entidad_recaudo entidad_recaudo, cab_clase_entidad as clase_entidad from cabeza_planilla,registro_tipo_11 where cab_num_planilla=t11_num_planilla and cab_per_pension_mes=t11_mes_pension and cab_per_pension_ano=t11_ano_pension and cab_num_ide=t11_num_ide_aport and cab_tipo_planilla=t11_tipo_planilla and cab_sucursal=t11_sucursal and cab_per_pension_ano in ('" + anioActualStr + "') and cab_tipo_ide in ('CC','NI','CE','CD','TI','PE','PA') and cab_num_ide='" + txtAportante.getText() + "' order by cab_per_pension_ano,cab_per_pension_mes;";
                     txtVisualizar.setText(consulta);
                 //no funciona revisar
                 } else if (txtAportante.getText().length()>0 && jlPeriodo.isSelectedIndex(2)){
-                    consulta = "select cab_fecha_trab, cab_fecha_vencimiento, cab_usuario, cab_num_planilla as planilla, cab_pin as pin, cab_tipo_planilla as tipo, cab_tipo_ide as tip, cab_num_ide as num, cab_sucursal as suc, cab_estado as estado, cab_indpago as ind, cab_per_pension_ano as ano, cab_per_pension_mes as mes, t11_total_salud as salud, t11_total_pension as pension, t11_total_arp as arp, t11_total_ccf as ccf, t11_gran_total as total_pago, cab_fecha_pago as fecha_pago, cab_hora_trab_pago as hora_pago, cab_entidad_recaudo entidad_recaudo, cab_clase_entidad as clase_entidad from cabeza_planilla,registro_tipo_11 where cab_num_planilla=t11_num_planilla and cab_per_pension_mes=t11_mes_pension and cab_per_pension_ano=t11_ano_pension and cab_num_ide=t11_num_ide_aport and cab_tipo_planilla=t11_tipo_planilla and cab_sucursal=t11_sucursal and cab_per_pension_ano in ('2024','2025') and cab_tipo_ide in ('CC','NI','CE','CD','TI','PE','PA') and cab_num_ide='" + txtAportante.getText() + "' order by cab_per_pension_ano,cab_per_pension_mes;";
+                    consulta = "select cab_fecha_trab, cab_fecha_vencimiento, cab_usuario, cab_num_planilla as planilla, cab_pin as pin, cab_tipo_planilla as tipo, cab_tipo_ide as tip, cab_num_ide as num, cab_sucursal as suc, cab_estado as estado, cab_indpago as ind, cab_per_pension_ano as ano, cab_per_pension_mes as mes, t11_total_salud as salud, t11_total_pension as pension, t11_total_arp as arp, t11_total_ccf as ccf, t11_gran_total as total_pago, cab_fecha_pago as fecha_pago, cab_hora_trab_pago as hora_pago, cab_entidad_recaudo entidad_recaudo, cab_clase_entidad as clase_entidad from cabeza_planilla,registro_tipo_11 where cab_num_planilla=t11_num_planilla and cab_per_pension_mes=t11_mes_pension and cab_per_pension_ano=t11_ano_pension and cab_num_ide=t11_num_ide_aport and cab_tipo_planilla=t11_tipo_planilla and cab_sucursal=t11_sucursal and cab_per_pension_ano in ('" + anioAnteriorStr + "','" + anioActual + "') and cab_tipo_ide in ('CC','NI','CE','CD','TI','PE','PA') and cab_num_ide='" + txtAportante.getText() + "' order by cab_per_pension_ano,cab_per_pension_mes;";
                     txtVisualizar.setText(consulta);
                 } else {
                     JOptionPane.showMessageDialog(null, "Escriba parámetros completos para poder generar.", "Validación", 1);
@@ -249,7 +259,7 @@ public class sentencias extends javax.swing.JFrame {
 
             case 3:
                 if (txtAportante.getText().length()>0) {
-                    consulta = "select cab_fecha_trab, cab_fecha_vencimiento, cab_usuario, cab_num_planilla as planilla, cab_pin as pin, cab_tipo_planilla as tipo, cab_tipo_ide as tip, cab_num_ide as num, cab_sucursal as suc, cab_estado as estado, cab_indpago as ind, cab_per_pension_ano as ano, cab_per_pension_mes as mes, t11_total_salud as salud, t11_total_pension as pension, t11_total_arp as arp, t11_total_ccf as ccf, t11_gran_total as total_pago, cab_fecha_pago as fecha_pago, cab_hora_trab_pago as hora_pago, cab_entidad_recaudo entidad_recaudo, cab_clase_entidad as clase_entidad from cabeza_planilla,registro_tipo_11 where cab_num_planilla=t11_num_planilla and cab_per_pension_mes=t11_mes_pension and cab_per_pension_ano=t11_ano_pension and cab_num_ide=t11_num_ide_aport and cab_tipo_planilla=t11_tipo_planilla and cab_sucursal=t11_sucursal and cab_per_pension_ano in ('2024') and cab_tipo_ide in ('CC','NI','CE','CD','TI','PE','PA') and cab_num_ide='" + txtAportante.getText() + "' order by cab_per_pension_ano,cab_per_pension_mes;" +
+                    consulta = "select cab_fecha_trab, cab_fecha_vencimiento, cab_usuario, cab_num_planilla as planilla, cab_pin as pin, cab_tipo_planilla as tipo, cab_tipo_ide as tip, cab_num_ide as num, cab_sucursal as suc, cab_estado as estado, cab_indpago as ind, cab_per_pension_ano as ano, cab_per_pension_mes as mes, t11_total_salud as salud, t11_total_pension as pension, t11_total_arp as arp, t11_total_ccf as ccf, t11_gran_total as total_pago, cab_fecha_pago as fecha_pago, cab_hora_trab_pago as hora_pago, cab_entidad_recaudo entidad_recaudo, cab_clase_entidad as clase_entidad from cabeza_planilla,registro_tipo_11 where cab_num_planilla=t11_num_planilla and cab_per_pension_mes=t11_mes_pension and cab_per_pension_ano=t11_ano_pension and cab_num_ide=t11_num_ide_aport and cab_tipo_planilla=t11_tipo_planilla and cab_sucursal=t11_sucursal and cab_per_pension_ano in ('"+ anioAnteriorStr +"') and cab_tipo_ide in ('CC','NI','CE','CD','TI','PE','PA') and cab_num_ide='" + txtAportante.getText() + "' order by cab_per_pension_ano,cab_per_pension_mes;" +
                         "\n \nselect pre_celular, * from pre_registro where pre_numide ='" + txtAportante.getText() + "';";
 
                     txtVisualizar.setText(consulta);
