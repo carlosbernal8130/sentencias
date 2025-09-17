@@ -33,10 +33,7 @@ public class sentencias extends javax.swing.JFrame {
     
     Year anioAnterior = anioActual.minusYears(1);
     String anioAnteriorStr = anioAnterior.toString();
-    
-    Year anioProximo = anioActual.plusYears(1);
-    String anioProximoStr = anioProximo.toString();
-    
+       
 	/**
      * Creates new form sentencias
      */
